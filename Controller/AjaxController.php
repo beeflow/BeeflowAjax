@@ -5,7 +5,7 @@ namespace BeeflowAjaxBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BeeflowAjaxBundle\Lib\BeeflowAjaxResponse;
 
-class DefaultController extends Controller {
+class AjaxController extends Controller {
 
 	protected $beeajaxResponse;
 
