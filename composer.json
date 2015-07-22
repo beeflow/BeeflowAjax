@@ -1,5 +1,5 @@
 {
-    "name": "app/BeeflowAjaxBundle",
+    "name": "beeflow/beeflowajaxbundle",
     "version": "1.0.0",
     "license": "GPL",
     "description": "The \"Symfony\" Ajax bundle",
