@@ -7,10 +7,10 @@ use BeeflowAjaxBundle\Lib\BeeflowAjaxResponse;
 
 class AjaxController extends Controller {
 
-	protected $beeajaxResponse;
+	protected $ajaxResponse;
 
 	public function __construct() {
-		$this->beeajaxResponse = new BeeflowAjaxResponse();
+		$this->ajaxResponse = new BeeflowAjaxResponse();
 	}
 
 }
