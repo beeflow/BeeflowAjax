@@ -1,0 +1,8 @@
+{
+    "name": "beeflow/BeeflowAjaxBundle",
+    "version": "1.0.0",
+    "description": "The \"Symfony\" Ajax bundle",
+    "require": {
+        "beeflow/BeeflowAjaxBundle": "dev-master"
+    }
+}
