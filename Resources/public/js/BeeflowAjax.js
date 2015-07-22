@@ -144,7 +144,11 @@ BeeflowAjax.initAjaxLinks = function () {
                     return false;
                 }
             }
-            BeeflowAjax.send($(this).data('action'), $(this).data());
+            var action = $(this).attr('href');
+            if (action === '#' || typeof action === 'undefined') {
+                action = $(this).data('action');
+            }
+            BeeflowAjax.send(action, $(this).data());
             e.preventDefault();
         });
     });
