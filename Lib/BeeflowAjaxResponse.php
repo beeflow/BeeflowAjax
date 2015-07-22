@@ -103,6 +103,22 @@ class BeeflowAjaxResponse {
 		return $this->addCommand($attributes, $javaScript);
 	}
 
+	public function show($element) {
+		$attributes = array(
+			'cmd' => 'show',
+			'id' => $element
+		);
+		return $this->addCommand($attributes);
+	}
+
+	public function hide($element) {
+		$attributes = array(
+			'cmd' => 'hide',
+			'id' => $element
+		);
+		return $this->addCommand($attributes);
+	}
+
 	public function __toString() {
 		return $this->getJson();
 	}
