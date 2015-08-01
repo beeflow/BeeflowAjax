@@ -71,7 +71,7 @@ class Json {
 			return $this->item;
 		}
 
-		if (isset($this->item[$fieldName])) {
+		if (isset($this->item[$fieldName]) && is_array($this->item[$fieldName])) {
 			return new Json($this->item[$fieldName]);
 		}
 
