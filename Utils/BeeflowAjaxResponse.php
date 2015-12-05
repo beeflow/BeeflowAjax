@@ -1,6 +1,6 @@
 <?php
 
-namespace BeeflowAjaxBundle\Lib;
+namespace BeeflowAjaxBundle\Utils;
 
 /**
  * Description of BeeajaxResponse
