@@ -18,7 +18,7 @@
 
 namespace BeeflowAjaxBundle\Tests\Utils;
 
-use BeeflowAjaxBundle\Lib\BeeflowAjaxResponse;
+use BeeflowAjaxBundle\Utils\BeeflowAjaxResponse;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 /**
