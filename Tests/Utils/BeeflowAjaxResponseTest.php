@@ -16,9 +16,10 @@
  * for more details.
  */
 
-namespace BeeflowAjaxBundle\Tests\Lib;
+namespace BeeflowAjaxBundle\Tests\Utils;
 
 use BeeflowAjaxBundle\Lib\BeeflowAjaxResponse;
+use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 /**
  * Description of BeeflowAjaxResponseTest
@@ -26,7 +27,7 @@ use BeeflowAjaxBundle\Lib\BeeflowAjaxResponse;
  * @author Rafal Przetakowski <rafal.p@beeflow.co.uk>
  * @copyright (c) 2015, Beeflow Ltd
  */
-class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
+class BeeflowAjaxResponseTest extends TestCase {
 
 	private $ajaxResponse;
 
