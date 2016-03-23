@@ -16,9 +16,10 @@
  * for more details.
  */
 
-namespace BeeflowAjaxBundle\Tests\Lib;
+namespace BeeflowAjaxBundle\Tests\Utils;
 
-use BeeflowAjaxBundle\Lib\BeeflowAjaxResponse;
+use BeeflowAjaxBundle\Utils\BeeflowAjaxResponse;
+use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 /**
  * Description of BeeflowAjaxResponseTest
@@ -26,32 +27,36 @@ use BeeflowAjaxBundle\Lib\BeeflowAjaxResponse;
  * @author Rafal Przetakowski <rafal.p@beeflow.co.uk>
  * @copyright (c) 2015, Beeflow Ltd
  */
-class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
+class BeeflowAjaxResponseTest extends TestCase {
 
 	private $ajaxResponse;
 
-	public function setUp() {
+	public function setUp()
+	{
 		$this->ajaxResponse = new BeeflowAjaxResponse();
 	}
 
 	/**
 	 * @test
 	 */
-	public function getJson() {
+	public function getJson()
+	{
 		$this->assertEquals('[]', $this->ajaxResponse->getJson());
 	}
 
 	/**
 	 * @test
 	 */
-	public function getArray() {
+	public function getArray()
+	{
 		$this->assertTrue(is_array($this->ajaxResponse->getArray()));
 	}
 
 	/**
 	 * @test
 	 */
-	public function alert() {
+	public function alert()
+	{
 		$this->ajaxResponse->alert('Test message');
 		$this->assertEquals('[{"cmd":"alert","data":"Test message"}]', $this->ajaxResponse->getJson());
 	}
@@ -59,7 +64,8 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function debug() {
+	public function debug()
+	{
 		$this->ajaxResponse->debug('Test message');
 		$this->assertEquals('[{"cmd":"debug","data":"Test message"}]', $this->ajaxResponse->getJson());
 	}
@@ -67,7 +73,8 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function append() {
+	public function append()
+	{
 		$this->ajaxResponse->append('element-id', 'Test');
 		$this->assertEquals('[{"cmd":"append","id":"element-id","data":"Test"}]', $this->ajaxResponse->getJson());
 	}
@@ -75,7 +82,8 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function assign() {
+	public function assign()
+	{
 		$this->ajaxResponse->assign('element-id', 'Test');
 		$this->assertEquals('[{"cmd":"assign","id":"element-id","data":"Test"}]', $this->ajaxResponse->getJson());
 	}
@@ -83,7 +91,8 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function redirect() {
+	public function redirect()
+	{
 		$this->ajaxResponse->redirect('example.com');
 		$this->assertEquals('[{"cmd":"redirect","url":"example.com","data":null}]', $this->ajaxResponse->getJson());
 	}
@@ -91,7 +100,8 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function reloadLocation() {
+	public function reloadLocation()
+	{
 		$this->ajaxResponse->reloadLocation();
 		$this->assertEquals('[{"cmd":"reloadLocation","data":null}]', $this->ajaxResponse->getJson());
 	}
@@ -99,7 +109,8 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function remove() {
+	public function remove()
+	{
 		$this->ajaxResponse->remove('element-id');
 		$this->assertEquals('[{"cmd":"remove","id":"element-id","data":null}]', $this->ajaxResponse->getJson());
 	}
@@ -107,7 +118,8 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function addClass() {
+	public function addClass()
+	{
 		$this->ajaxResponse->addClass('element-id', 'new-classname');
 		$this->assertEquals('[{"cmd":"addClass","id":"element-id","data":"new-classname"}]', $this->ajaxResponse->getJson());
 	}
@@ -115,7 +127,8 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function removeClass() {
+	public function removeClass()
+	{
 		$this->ajaxResponse->removeClass('element-id', 'new-classname');
 		$this->assertEquals('[{"cmd":"removeClass","id":"element-id","data":"new-classname"}]', $this->ajaxResponse->getJson());
 	}
@@ -123,7 +136,8 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function removeAllClasses() {
+	public function removeAllClasses()
+	{
 		$this->ajaxResponse->removeClass('element-id');
 		$this->assertEquals('[{"cmd":"removeClass","id":"element-id","data":null}]', $this->ajaxResponse->getJson());
 	}
@@ -131,7 +145,39 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function returnJson() {
+	public function show()
+	{
+		$this->ajaxResponse->show('element-id');
+		$this->assertEquals('[{"cmd":"show","id":"element-id","data":null}]', $this->ajaxResponse->getJson());
+	}
+
+	/**
+	 * @test
+	 */
+	public function hide()
+	{
+		$this->ajaxResponse->hide('element-id');
+		$this->assertEquals('[{"cmd":"hide","id":"element-id","data":null}]', $this->ajaxResponse->getJson());
+	}
+
+	/**
+	 * @test
+	 */
+	public function printOutput()
+	{
+		$this->ajaxResponse->hide('element-id');
+		ob_start();
+		$this->ajaxResponse->printOutput();
+		$given = ob_get_contents();
+		ob_end_clean();
+		$this->assertEquals('[{"cmd":"hide","id":"element-id","data":null}]', $given);
+	}
+	
+	/**
+	 * @test
+	 */
+	public function returnJson()
+	{
 		$this->ajaxResponse->returnJson(array('test-field' => 'test value'));
 		$this->assertEquals('{"test-field":"test value"}', $this->ajaxResponse->getJson());
 	}
@@ -139,7 +185,17 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function script() {
+	public function returnJsonWithErrors()
+	{
+		$this->ajaxResponse->returnJson(array('errors' => array('Some error message', 'Other error message')));
+		$this->assertEquals('["Some error message","Other error message"]', $this->ajaxResponse->getJson());
+	}
+
+	/**
+	 * @test
+	 */
+	public function script()
+	{
 		$this->ajaxResponse->script('alert()');
 		$this->assertEquals('[{"cmd":"runScript","data":"alert()"}]', $this->ajaxResponse->getJson());
 	}
@@ -147,7 +203,8 @@ class BeeflowAjaxResponseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function toString() {
+	public function toString()
+	{
 		$this->assertEquals('[]', $this->ajaxResponse);
 	}
 

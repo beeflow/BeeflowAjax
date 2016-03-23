@@ -3,7 +3,7 @@
 namespace BeeflowAjaxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use BeeflowAjaxBundle\Lib\BeeflowAjaxResponse;
+use BeeflowAjaxBundle\Utils\BeeflowAjaxResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class AjaxController extends Controller {
