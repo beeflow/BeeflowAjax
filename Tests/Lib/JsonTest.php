@@ -86,7 +86,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase {
 		$jsonData = '{"fields": {"id": 11111, "field": "field_name", "value": "new value"}, "other_field": "other field value"}';
 		$json = new Json($jsonData);
 
-		$this->assertEquals('other field value', $json->get('fields')->get('other_field'));
+		$this->assertEquals('other field value', $json->get('other_field'));
 	}
 
 	/**
@@ -95,7 +95,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase {
 	public function setNewValueOfExistingKey() {
 		$jsonData = '{"fields": {"id": 11111, "field": "field_name", "value": "new value"}}';
 		$json = new Json($jsonData);
-		$json->set('value', 'new value of field');
+		$json->set('fields/value', 'new value of field');
 
 		$this->assertEquals('new value of field', $json->get('fields')->get('value'));
 	}
@@ -108,7 +108,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase {
 		$json = new Json($jsonData);
 		$json->set('other_field', 'new value of field');
 
-		$this->assertEquals('new value of field', $json->get('fields')->get('other_field'));
+		$this->assertEquals('new value of field', $json->get('other_field'));
 	}
 
 	/**
@@ -117,7 +117,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase {
 	public function setNewValueWithNewKey() {
 		$jsonData = '{"fields": {"id": 11111, "field": "field_name", "value": "new value"}}';
 		$json = new Json($jsonData);
-		$json->set('new_value_value', 'new value of field');
+		$json->set('fields/new_value_value', 'new value of field');
 
 		$this->assertEquals('new value of field', $json->get('fields')->get('new_value_value'));
 	}
