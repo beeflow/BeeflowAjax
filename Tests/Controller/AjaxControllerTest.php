@@ -16,16 +16,15 @@
  * for more details.
  */
 
-namespace BeeflowAjaxBundle\Tests\Controller;
+namespace Beeflow\AjaxBundle\Tests\Controller;
 
-use BeeflowAjaxBundle\Controller\AjaxController;
+use Beeflow\AjaxBundle\Controller\AjaxController;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 /**
  * Description of AjaxControllerTest
  *
  * @author Rafal Przetakowski <rafal.p@beeflow.co.uk>
- * @copyright (c) 2015 Beeflow Ltd
  */
 class AjaxControllerTest extends TestCase
 {

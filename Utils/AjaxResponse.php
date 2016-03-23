@@ -1,14 +1,13 @@
 <?php
 
-namespace BeeflowAjaxBundle\Utils;
+namespace Beeflow\AjaxBundle\Utils;
 
 /**
  * Description of BeeajaxResponse
  *
  * @author Rafal Przetakowski <rafal.p@beeflow.co.uk>
- * @copyright (c) 2015, Beeflow Ltd
  */
-class BeeflowAjaxResponse {
+class AjaxResponse {
 
 	private $aCommands = array();
 

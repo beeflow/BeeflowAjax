@@ -16,24 +16,23 @@
  * for more details.
  */
 
-namespace BeeflowAjaxBundle\Tests\Utils;
+namespace Beeflow\AjaxBundle\Tests\Utils;
 
-use BeeflowAjaxBundle\Utils\BeeflowAjaxResponse;
+use Beeflow\AjaxBundle\Utils\AjaxResponse;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 
 /**
  * Description of BeeflowAjaxResponseTest
  *
  * @author Rafal Przetakowski <rafal.p@beeflow.co.uk>
- * @copyright (c) 2015, Beeflow Ltd
  */
-class BeeflowAjaxResponseTest extends TestCase {
+class AjaxResponseTest extends TestCase {
 
 	private $ajaxResponse;
 
 	public function setUp()
 	{
-		$this->ajaxResponse = new BeeflowAjaxResponse();
+		$this->ajaxResponse = new AjaxResponse();
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?php
 
-namespace BeeflowAjaxBundle\Controller;
+namespace Beeflow\AjaxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use BeeflowAjaxBundle\Utils\BeeflowAjaxResponse;
