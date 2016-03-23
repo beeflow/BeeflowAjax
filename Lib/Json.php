@@ -38,8 +38,7 @@ class Json {
 	public function __construct($jsonString = null) {
 		$jsonString = str_replace('\"', '"', $jsonString);
 		if (isset($jsonString) && !is_array($jsonString)) {
-			// http://stackoverflow.com/questions/11267769/is-there-a-php-5-3-bug-concerning-json-decode-returning-null-on-valid-json-strin
-			$this->item = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $jsonString), true);
+			$this->item = json_decode($jsonString, true);
 		} else if (is_array($jsonString)) {
 			$this->item = $jsonString;
 		} else {
@@ -69,13 +68,13 @@ class Json {
 	public function get($fieldName = null) {
 		if (empty($fieldName)) {
 			return $this->item;
-		}
-
-		if (isset($this->item[$fieldName]) && is_array($this->item[$fieldName])) {
+		} elseif (isset($this->item[$fieldName]) && is_array($this->item[$fieldName])) {
 			return new Json($this->item[$fieldName]);
+		} elseif (isset($this->item[$fieldName])) {
+			return $this->item[$fieldName];
+		} else {
+			return $this->getValueFromField($this->item, $fieldName);
 		}
-
-		return $this->getValueFromField($this->item, $fieldName);
 	}
 
 	/**
@@ -84,12 +83,15 @@ class Json {
 	 * @param mixed $value
 	 */
 	public function set($fieldName, $value) {
-		$newArray = $this->setNewValue($this->item, $fieldName, $value);
-		if (empty($newArray)) {
-			$this->add($fieldName, $value);
-		} else {
-			$this->item = $newArray;
+		$fieldsPath = explode('/', $fieldName);
+		$item =& $this->item;
+		for ($element = 0; $element < count($fieldsPath) -1 ; $element++) {
+			if (isset($item[$fieldsPath[$element]])) {
+				$item =& $item[$fieldsPath[$element]];
+			}
 		}
+
+		$item[end($fieldsPath)] = $value;
 	}
 
 	/**
