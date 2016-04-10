@@ -3,7 +3,7 @@
 namespace Beeflow\AjaxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use BeeflowAjaxBundle\Utils\BeeflowAjaxResponse;
+use Beeflow\AjaxBundle\Utils\AjaxResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class AjaxController extends Controller {
@@ -11,7 +11,7 @@ class AjaxController extends Controller {
 	protected $ajaxResponse;
 
 	public function __construct() {
-		$this->ajaxResponse = new BeeflowAjaxResponse();
+		$this->ajaxResponse = new AjaxResponse();
 	}
 
 	/**
