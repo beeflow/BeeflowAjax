@@ -128,7 +128,7 @@ BeeflowAjax.initAjaxForms = function () {
     $('.ajax-form').each(function () {
         $(this).unbind('submit');
         $(this).submit(function (e) {
-            BeeflowAjax.ajax($(this).attr('action'), BeeflowAjax.getFormValues(this));
+            BeeflowAjax.send($(this).attr('action'), BeeflowAjax.getFormValues(this));
             e.preventDefault();
         });
     });
