@@ -9,7 +9,14 @@
 var BeeflowAjax = BeeflowAjax || {};
 var pingFunctions = [];
 
-BeeflowAjax.send = function (action, params) {
+BeeflowAjax.send = function (action, params, clicked_button) {
+    $(clicked_button).addClass('disabled');
+    var icon = $(clicked_button).children()[0];
+    if (typeof icon !== 'undefined') {
+        var icon_class = $(icon).attr('class');
+        $(icon).removeClass(icon_class);
+        $(icon).addClass('fa fa-spin fa-spinner');
+    }
     $.ajax({
         method: "POST",
         url: action,
@@ -17,6 +24,11 @@ BeeflowAjax.send = function (action, params) {
     }).done(function (responseMessage) {
         var msg = JSON.parse(responseMessage);
         BeeflowAjax.ajaxResponseCommands(msg);
+        if (typeof icon !== 'undefined') {
+            $(icon).removeClass();
+            $(icon).addClass(icon_class);
+        }
+        $(clicked_button).removeClass('disabled');
     });
 
 };
@@ -126,9 +138,23 @@ BeeflowAjax.getFormValues = function (form) {
 
 BeeflowAjax.initAjaxForms = function () {
     $('.ajax-form').each(function () {
+        var $form = this;
+        $('button[type="submit"]').on('click', function () {
+            $($form).data('button', this.name);
+        });
+        $('input[type="submit"]').on('click', function () {
+            $($form).data('input', this.name);
+        });
+
         $(this).unbind('submit');
         $(this).submit(function (e) {
-            BeeflowAjax.send($(this).attr('action'), BeeflowAjax.getFormValues(this));
+
+            var submitButton = $(this).find('button[type="submit"]');
+            if (submitButton.length === 0) {
+                submitButton = $(this).find('input[type="submit"]');
+            }
+
+            BeeflowAjax.send($(this).attr('action'), BeeflowAjax.getFormValues(this), submitButton);
             e.preventDefault();
         });
     });
