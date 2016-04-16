@@ -2,7 +2,7 @@
     "name": "beeflow/ajaxbundle",
     "type": "symfony-bundle",
     "description": "Symfony BeeflowAjaxBundle",
-    "keywords": ["rest", "api", "ajax"],
+    "keywords": ["api", "ajax"],
 	"homepage": "https://github.com/beeflow/BeeflowAjax",
     "license": "GPL",
     "authors": [
