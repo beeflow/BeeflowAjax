@@ -58,22 +58,22 @@ BeeflowAjax.ajaxResponseCommands = function (msg) {
                 console.log(msg[index]['data']);
                 break;
             case "remove" :
-                $("#" + msg[index]['id']).remove();
+                $(msg[index]['id']).remove();
                 break;
             case "append" :
-                $('#' + msg[index]['id']).append(msg[index]['data']);
+                $(msg[index]['id']).append(msg[index]['data']);
                 break;
             case "assign" :
-                $('#' + msg[index]['id']).html(msg[index]['data']);
+                $(msg[index]['id']).html(msg[index]['data']);
                 break;
             case "addClass" :
-                $('#' + msg[index]['id']).addClass(msg[index]['data']);
+                $(msg[index]['id']).addClass(msg[index]['data']);
                 break;
             case "removeClass" :
                 if (msg[index]['data'] == null) {
-                    $('#' + msg[index]['id']).removeClass();
+                    $(msg[index]['id']).removeClass();
                 } else {
-                    $('#' + msg[index]['id']).removeClass(msg[index]['data']);
+                    $(msg[index]['id']).removeClass(msg[index]['data']);
                 }
                 break;
             case "redirect" :
@@ -86,13 +86,13 @@ BeeflowAjax.ajaxResponseCommands = function (msg) {
                 jQuery.globalEval(msg[index]['data']);
                 break;
             case "modal" :
-                $('#' + msg[index]['id']).modal(msg[index]['data']);
+                $(msg[index]['id']).modal(msg[index]['data']);
                 break;
             case "show" :
-                $('#' + msg[index]['id']).show();
+                $(msg[index]['id']).show();
                 break;
             case "hide" :
-                $('#' + msg[index]['id']).hide();
+                $(msg[index]['id']).hide();
                 break;
             case "insertBefore":
                 $(msg[index]['data']).insertBefore(msg[index]['id']);
