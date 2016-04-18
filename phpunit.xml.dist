@@ -7,7 +7,7 @@
          colors="true"
          processIsolation="false"
          syntaxCheck="false"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="Tests/bootstrap.php"
 >
     <testsuites>
         <testsuite name="Project Test Suite">
