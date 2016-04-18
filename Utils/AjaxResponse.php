@@ -122,6 +122,14 @@ class AjaxResponse {
 		return $this->getJson();
 	}
 
+	public function insertBefore($element, $value) {
+		$attributes = array(
+			'cmd' => 'insertBefore',
+			'id' => $element
+		);
+		return $this->addCommand($attributes, $value);
+	}
+
 	private function addCommand(array $aAttributes, $mData = null) {
 		$aAttributes['data'] = $mData;
 		$this->aCommands[] = $aAttributes;

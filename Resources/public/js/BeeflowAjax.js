@@ -94,6 +94,8 @@ BeeflowAjax.ajaxResponseCommands = function (msg) {
             case "hide" :
                 $('#' + msg[index]['id']).hide();
                 break;
+            case "insertBefore":
+                $(msg[index]['data']).insertBefore(msg[index]['id']);
             case "returnJson" :
                 break;
         }
