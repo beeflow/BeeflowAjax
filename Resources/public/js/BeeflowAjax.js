@@ -30,10 +30,8 @@ BeeflowAjax.send = function (action, params, clicked_button, callback) {
         }
         $(clicked_button).removeClass('disabled');
 
-        try {
+        if (callback && typeof(callback) === "function") {
             callback();
-        } catch (err) {
-            // do nothing
         }
     });
 
