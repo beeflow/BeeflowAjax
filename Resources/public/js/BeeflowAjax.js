@@ -180,7 +180,7 @@ BeeflowAjax.initAjaxLinks = function () {
             if (action === '#' || typeof action === 'undefined') {
                 action = $(this).data('action');
             }
-            BeeflowAjax.send(action, $(this).data());
+            BeeflowAjax.send(action, $(this).data(), this);
             e.preventDefault();
         });
     });
