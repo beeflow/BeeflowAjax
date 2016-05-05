@@ -9,7 +9,7 @@
 var BeeflowAjax = BeeflowAjax || {};
 var pingFunctions = [];
 
-BeeflowAjax.send = function (action, params, clicked_button) {
+BeeflowAjax.send = function (action, params, clicked_button, callback) {
     $(clicked_button).addClass('disabled');
     var icon = $(clicked_button).children()[0];
     if (typeof icon !== 'undefined') {
@@ -29,6 +29,12 @@ BeeflowAjax.send = function (action, params, clicked_button) {
             $(icon).addClass(icon_class);
         }
         $(clicked_button).removeClass('disabled');
+
+        try {
+            callback();
+        } catch (err) {
+            // do nothing
+        }
     });
 
 };
