@@ -37,4 +37,12 @@ class AjaxController extends Controller
     {
         return new Response($this->ajaxResponse);
     }
+
+    /**
+     * @return AjaxResponse
+     */
+    public function getAjaxResponse()
+    {
+        return $this->ajaxResponse;
+    }
 }
