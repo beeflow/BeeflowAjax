@@ -136,8 +136,19 @@ BeeflowAjax.getFormValues = function (form) {
         var objects = $(form).serializeArray();
     }
     var returnJson = {};
-    for (var i = 0, j = objects.length; i < j; i++) {
-        returnJson[objects[i].name] = objects[i].value;
+    jQuery.each(objects, function (i, field) {
+        if (typeof returnJson[field.name] !== 'undefined' && Object.prototype.toString.call(returnJson[field.name]) !== '[object Array]') {
+            var tmp = returnJson[field.name];
+            returnJson[field.name] = [tmp, htmlEncode(field.value)];
+        } else if (typeof returnJson[field.name] !== 'undefined' && Object.prototype.toString.call(returnJson[field.name]) === '[object Array]') {
+            returnJson[field.name].push(htmlEncode(field.value));
+        } else {
+            returnJson[field.name] = htmlEncode(field.value);
+        }
+    });
+
+    function htmlEncode(value) {
+        return $('<div/>').text(value).html();
     }
     return JSON.stringify(returnJson);
 };
