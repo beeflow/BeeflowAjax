@@ -23,11 +23,11 @@ BeeflowAjax.send = function (action, params, clicked_button, callback) {
         data: {'data': params}
     }).done(function (responseMessage) {
         var msg = JSON.parse(responseMessage);
-        BeeflowAjax.ajaxResponseCommands(msg);
         if (typeof icon !== 'undefined') {
             $(icon).removeClass();
             $(icon).addClass(icon_class);
         }
+        BeeflowAjax.ajaxResponseCommands(msg);
         $(clicked_button).removeClass('disabled');
 
         if (callback && typeof(callback) === "function") {
