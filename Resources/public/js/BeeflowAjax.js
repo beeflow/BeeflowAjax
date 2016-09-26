@@ -197,8 +197,42 @@ BeeflowAjax.initAjaxLinks = function () {
     });
 };
 
+var AjaxSelect = [];
+BeeflowAjax.initAjaxSelect = function () {
+    $("select").each(function () {
+        if (typeof $(this).data('ajax-datasource') !== 'undefined' && !inArray($(this).attr('id'), AjaxSelect)) {
+            $(this).unbind('change');
+            AjaxSelect.push($(this).attr('id'));
+            var $element = $(this);
+            var $request = $.ajax({
+                url: $(this).data('ajax-datasource')
+            });
+
+            var url_value = url('?' + $(this).data('url-value'), decodeURIComponent(url()));
+            var default_value = ($(this).data('default-value') === 'undefined') ? null : $(this).data('default-value');
+            var selected_value = (url_value == null) ? default_value : url_value;
+            if (typeof $(this).attr('multiple') === 'undefined') {
+                var option = new Option('--', 0, (selected_value == null) ? true : false, (selected_value == null) ? true : false);
+                $element.append(option);
+            }
+            $request.then(function (data) {
+                for (var d = 0; d < data.length; d++) {
+                    var item = data[d];
+                    if (typeof selected_value !== 'object') {
+                        var selected = (selected_value == item.id);
+                    } else {
+                        var selected = inArray(item.id, selected_value);
+                    }
+                    var option = new Option(item.text, item.id, selected, selected);
+                    $element.append(option);
+                }
+            });
+        }
+    });
+};
 $(document).ready(function () {
     BeeflowAjax.initAjaxForms();
     BeeflowAjax.initAjaxLinks();
+    BeeflowAjax.initAjaxSelect();
     setInterval(BeeflowAjax.ping, 60000);
 });
