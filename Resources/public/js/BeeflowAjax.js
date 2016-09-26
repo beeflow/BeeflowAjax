@@ -198,9 +198,9 @@ BeeflowAjax.initAjaxLinks = function () {
 };
 
 var AjaxSelect = [];
-BeeflowAjax.initAjaxSelect = function () {
+BeeflowAjax.initAjaxSelect = function (elementId) {
     $("select").each(function () {
-        if (typeof $(this).data('ajax-datasource') !== 'undefined' && !inArray($(this).attr('id'), AjaxSelect)) {
+        if (typeof $(this).data('ajax-datasource') !== 'undefined' && (!inArray($(this).attr('id'), AjaxSelect) || elementId == $(this).attr('id'))) {
             $(this).unbind('change');
             $(this).find('option').remove();
             AjaxSelect.push($(this).attr('id'));
@@ -250,6 +250,14 @@ function inArray(needle, haystack) {
         }
     }
     return false;
+}
+
+function removeFromAjaxSelect(element) {
+    for (var key in AjaxSelect) {
+        if (AjaxSelect[key] == 'bar') {
+            AjaxSelect.splice(key, 1);
+        }
+    }
 }
 
 $(document).ready(function () {
