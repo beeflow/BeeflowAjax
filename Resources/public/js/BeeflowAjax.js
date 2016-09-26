@@ -202,6 +202,7 @@ BeeflowAjax.initAjaxSelect = function () {
     $("select").each(function () {
         if (typeof $(this).data('ajax-datasource') !== 'undefined' && !inArray($(this).attr('id'), AjaxSelect)) {
             $(this).unbind('change');
+            $(this).find('option').remove();
             AjaxSelect.push($(this).attr('id'));
             var $element = $(this);
             var $request = $.ajax({
