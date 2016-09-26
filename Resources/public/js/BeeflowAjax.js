@@ -230,6 +230,27 @@ BeeflowAjax.initAjaxSelect = function () {
         }
     });
 };
+
+function inArray(needle, haystack) {
+    if (typeof haystack === 'string') {
+        haystack = [haystack];
+    }
+    if (typeof haystack === 'undefined') {
+        return false;
+    }
+    var length = haystack.length;
+    for (var i = 0; i < length; i++) {
+        if (typeof haystack[i] == 'object') {
+            if (arrayCompare(haystack[i], needle))
+                return true;
+        } else {
+            if (haystack[i] == needle)
+                return true;
+        }
+    }
+    return false;
+}
+
 $(document).ready(function () {
     BeeflowAjax.initAjaxForms();
     BeeflowAjax.initAjaxLinks();
