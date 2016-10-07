@@ -148,9 +148,9 @@ BeeflowAjax.prepareJson = function (returnJson, fieldName, fieldValue) {
         var new_field = /(.*)\[/.exec(fieldName)[1];
         var new_field_key = /\[(.*)\]/.exec(fieldName)[1];
         if (typeof returnJson[new_field] === 'undefined') {
-            returnJson[new_field] = [];
+            returnJson[new_field] = {};
         }
-        returnJson[new_field].push(BeeflowAjax.prepareJson({}, new_field_key, fieldValue));
+        returnJson[new_field] = BeeflowAjax.prepareJson(returnJson[new_field], new_field_key, fieldValue);
     } else {
         if (typeof returnJson[fieldName] !== 'undefined' && Object.prototype.toString.call(returnJson[fieldName]) !== '[object Array]') {
             var tmp = returnJson[fieldName];
