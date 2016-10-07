@@ -137,20 +137,36 @@ BeeflowAjax.getFormValues = function (form) {
     }
     var returnJson = {};
     jQuery.each(objects, function (i, field) {
-        if (typeof returnJson[field.name] !== 'undefined' && Object.prototype.toString.call(returnJson[field.name]) !== '[object Array]') {
-            var tmp = returnJson[field.name];
-            returnJson[field.name] = [tmp, htmlEncode(field.value)];
-        } else if (typeof returnJson[field.name] !== 'undefined' && Object.prototype.toString.call(returnJson[field.name]) === '[object Array]') {
-            returnJson[field.name].push(htmlEncode(field.value));
-        } else {
-            returnJson[field.name] = htmlEncode(field.value);
-        }
+        returnJson = BeeflowAjax.prepareJson(returnJson, field.name, field.value);
     });
+
+    return JSON.stringify(returnJson);
+};
+
+BeeflowAjax.prepareJson = function (returnJson, fieldName, fieldValue) {
+    if (/\[(.*)\]/.exec(fieldName) != null) {
+        var new_field = /(.*)\[/.exec(fieldName)[1];
+        var new_field_key = /\[(.*)\]/.exec(fieldName)[1];
+        if (typeof returnJson[new_field] === 'undefined') {
+            returnJson[new_field] = [];
+        }
+        returnJson[new_field].push(BeeflowAjax.prepareJson({}, new_field_key, fieldValue));
+    } else {
+        if (typeof returnJson[fieldName] !== 'undefined' && Object.prototype.toString.call(returnJson[fieldName]) !== '[object Array]') {
+            var tmp = returnJson[fieldName];
+            returnJson[fieldName] = [tmp, htmlEncode(fieldValue)];
+        } else if (typeof returnJson[fieldName] !== 'undefined' && Object.prototype.toString.call(returnJson[fieldName]) === '[object Array]') {
+            returnJson[fieldName].push(htmlEncode(fieldValue));
+        } else {
+            returnJson[fieldName] = htmlEncode(fieldValue);
+        }
+    }
 
     function htmlEncode(value) {
         return $('<div/>').text(value).html();
     }
-    return JSON.stringify(returnJson);
+
+    return returnJson;
 };
 
 BeeflowAjax.initAjaxForms = function () {
