@@ -22,13 +22,18 @@ BeeflowAjax.send = function (action, params, clicked_button, callback) {
         url: action,
         data: {'data': params}
     }).done(function (responseMessage) {
-        var msg = JSON.parse(responseMessage);
+        if ("string" === typeof responseMessage) {
+            var msg = JSON.parse(responseMessage);
+        } else {
+            var msg = responseMessage;
+        }
         BeeflowAjax.ajaxResponseCommands(msg);
         if (callback && typeof(callback) === "function") {
-            callback();
+            callback(msg);
         }
-    }).fail(function() {
+    }).fail(function(msg) {
         alert( "Something is wrong :( Please contact with administrator." );
+        console.log(msg)
     }).always(function() {
         if (typeof icon !== 'undefined') {
             $(icon).removeClass();
