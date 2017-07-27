@@ -18,7 +18,7 @@ BeeflowAjax.send = function (action, params, clicked_button, callback, callMetho
         $(icon).addClass('fa fa-spin fa-spinner');
     }
 
-    if (typeof callMethod !== 'undefined') {
+    if (typeof callMethod === 'undefined') {
         callMethod = "POST";
     }
 
