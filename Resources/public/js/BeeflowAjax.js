@@ -191,6 +191,13 @@ BeeflowAjax.initAjaxForms = function () {
             $($form).data('input', this.name);
         });
 
+        var callbackMethod = $($form).data('callback');
+        var method = $($form).attr('method');
+
+        if (typeof method === 'undefined') {
+            method = 'POST';
+        }
+
         $(this).unbind('submit');
         $(this).submit(function (e) {
 
@@ -199,7 +206,7 @@ BeeflowAjax.initAjaxForms = function () {
                 submitButton = $(this).find('input[type="submit"]');
             }
 
-            BeeflowAjax.send($(this).attr('action'), BeeflowAjax.getFormValues(this), submitButton);
+            BeeflowAjax.send($(this).attr('action'), BeeflowAjax.getFormValues(this), submitButton, callbackMethod, method);
             e.preventDefault();
         });
     });
@@ -219,7 +226,10 @@ BeeflowAjax.initAjaxLinks = function () {
             if (action === '#' || typeof action === 'undefined') {
                 action = $(this).data('action');
             }
-            BeeflowAjax.send(action, $(this).data(), this);
+
+            var callMethod = $(this).data('callback');
+
+            BeeflowAjax.send(action, $(this).data(), this, callMethod, 'GET');
             e.preventDefault();
         });
     });
