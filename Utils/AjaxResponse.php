@@ -32,6 +32,26 @@ class AjaxResponse
         return $this->addCommand(array('cmd' => 'alert'), $msg);
     }
 
+    public function alertSuccess($msg)
+    {
+        return $this->addCommand(array('cmd' => 'alertSuccess'), $msg);
+    }
+
+    public function alertError($msg)
+    {
+        return $this->addCommand(array('cmd' => 'alertError'), $msg);
+    }
+
+    public function alertWarning($msg)
+    {
+        return $this->addCommand(array('cmd' => 'alertWarning'), $msg);
+    }
+
+    public function alertInfo($msg)
+    {
+        return $this->addCommand(array('cmd' => 'alertInfo'), $msg);
+    }
+
     public function debug($data)
     {
         return $this->addCommand(array('cmd' => 'debug'), $data);
@@ -168,5 +188,4 @@ class AjaxResponse
 
         return $this;
     }
-
 }

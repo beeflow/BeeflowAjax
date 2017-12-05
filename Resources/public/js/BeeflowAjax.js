@@ -1,14 +1,35 @@
-/* 
- * 
- * 
+/**
  * @author Rafal Przetakowski <rafal.p@beeflow.co.uk>
- * @copyright (c) 2015, Beeflow Ltd
+ * @copyright (c) 2015 - 2017, Beeflow Ltd
  */
 
 
 var BeeflowAjax = BeeflowAjax || {};
 var pingFunctions = [];
 
+/**
+ * You can easy use toastr or write your own methods to show messages
+ */
+var BeeflowMessageComponent = BeeflowMessageComponent || {};
+
+BeeflowMessageComponent.success = function (msg, title) {
+    alert(title + "\n\n" + msg );
+};
+
+BeeflowMessageComponent.error = function (msg, title) {
+    alert(title + "\n\n" + msg );
+};
+
+BeeflowMessageComponent.warning = function (msg, title) {
+    alert(title + "\n\n" + msg );
+};
+
+BeeflowMessageComponent.info = function (msg, title) {
+    alert(title + "\n\n" + msg );
+};
+
+
+BeeflowMessageComponent.
 BeeflowAjax.send = function (action, params, clicked_button, callback, callMethod) {
     $(clicked_button).addClass('disabled');
     var icon = $(clicked_button).children()[0];
@@ -69,6 +90,18 @@ BeeflowAjax.ajaxResponseCommands = function (msg) {
         switch (command) {
             case "alert" :
                 alert(msg[index]['data']);
+                break;
+            case "alertSuccess" :
+                BeeflowMessageComponent.success('', msg[index]['data']);
+                break;
+            case "alertError" :
+                BeeflowMessageComponent.error(msg[index]['data'], '');
+                break;
+            case "alertWarning" :
+                BeeflowMessageComponent.warning('', msg[index]['data']);
+                break;
+            case "alertInfo" :
+                BeeflowMessageComponent.info('', msg[index]['data']);
                 break;
             case "debug" :
                 console.log(msg[index]['data']);

@@ -64,6 +64,42 @@ class AjaxResponseTest extends TestCase
     /**
      * @test
      */
+    public function alertSuccess()
+    {
+        $this->ajaxResponse->alertSuccess('Test message');
+        $this->assertEquals('[{"cmd":"alertSuccess","data":"Test message"}]', $this->ajaxResponse->getJson());
+    }
+
+    /**
+     * @test
+     */
+    public function alertError()
+    {
+        $this->ajaxResponse->alertError('Test message');
+        $this->assertEquals('[{"cmd":"alertError","data":"Test message"}]', $this->ajaxResponse->getJson());
+    }
+
+    /**
+     * @test
+     */
+    public function alertWarning()
+    {
+        $this->ajaxResponse->alertWarning('Test message');
+        $this->assertEquals('[{"cmd":"alertWarning","data":"Test message"}]', $this->ajaxResponse->getJson());
+    }
+
+    /**
+     * @test
+     */
+    public function alertInfo()
+    {
+        $this->ajaxResponse->alertInfo('Test message');
+        $this->assertEquals('[{"cmd":"alertInfo","data":"Test message"}]', $this->ajaxResponse->getJson());
+    }
+
+    /**
+     * @test
+     */
     public function debug()
     {
         $this->ajaxResponse->debug('Test message');
