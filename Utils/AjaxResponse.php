@@ -7,133 +7,166 @@ namespace Beeflow\AjaxBundle\Utils;
  *
  * @author Rafal Przetakowski <rafal.p@beeflow.co.uk>
  */
-class AjaxResponse {
+class AjaxResponse
+{
 
-	private $aCommands = array();
+    private $aCommands = array();
 
-	public function getJson() {
-		return json_encode($this->aCommands);
-	}
+    public function getJson()
+    {
+        return json_encode($this->aCommands);
+    }
 
-	public function printOutput() {
-		echo $this->getJson();
-	}
+    public function printOutput()
+    {
+        echo $this->getJson();
+    }
 
-	public function getArray() {
-		return $this->aCommands;
-	}
+    public function getArray()
+    {
+        return $this->aCommands;
+    }
 
-	public function alert($msg) {
-		return $this->addCommand(array('cmd' => 'alert'), $msg);
-	}
+    public function alert($msg)
+    {
+        return $this->addCommand(array('cmd' => 'alert'), $msg);
+    }
 
-	public function debug($data) {
-		return $this->addCommand(array('cmd' => 'debug'), $data);
-	}
+    public function debug($data)
+    {
+        return $this->addCommand(array('cmd' => 'debug'), $data);
+    }
 
-	public function append($element, $value) {
-		$attributes = array(
-			'cmd' => 'append',
-			'id' => $element
-		);
-		return $this->addCommand($attributes, $value);
-	}
+    public function append($element, $value)
+    {
+        $attributes = array(
+            'cmd' => 'append',
+            'id'  => $element
+        );
 
-	public function assign($element, $value) {
-		$attributes = array(
-			'cmd' => 'assign',
-			'id' => $element
-		);
-		return $this->addCommand($attributes, $value);
-	}
+        return $this->addCommand($attributes, $value);
+    }
 
-	public function redirect($url) {
-		$attributes = array(
-			'cmd' => 'redirect',
-			'url' => $url
-		);
-		return $this->addCommand($attributes);
-	}
+    public function assign($element, $value)
+    {
+        $attributes = array(
+            'cmd' => 'assign',
+            'id'  => $element
+        );
 
-	public function reloadLocation() {
-		$attributes = array(
-			'cmd' => 'reloadLocation'
-		);
-		return $this->addCommand($attributes);
-	}
+        return $this->addCommand($attributes, $value);
+    }
 
-	public function remove($element) {
-		$attributes = array(
-			'cmd' => 'remove',
-			'id' => $element
-		);
-		return $this->addCommand($attributes);
-	}
+    public function redirect($url)
+    {
+        $attributes = array(
+            'cmd' => 'redirect',
+            'url' => $url
+        );
 
-	public function addClass($element, $className) {
-		$attributes = array(
-			'cmd' => 'addClass',
-			'id' => $element
-		);
-		return $this->addCommand($attributes, $className);
-	}
+        return $this->addCommand($attributes);
+    }
 
-	public function removeClass($element, $className = null) {
-		$attributes = array(
-			'cmd' => 'removeClass',
-			'id' => $element
-		);
-		return $this->addCommand($attributes, $className);
-	}
+    public function reloadLocation()
+    {
+        $attributes = array(
+            'cmd' => 'reloadLocation'
+        );
 
-	public function returnJson(array $data) {
-		if (!empty($data['errors'])) {
-			$this->aCommands = $data['errors'];
-		} else {
-			$this->aCommands = $data;
-		}
-		return $this;
-	}
+        return $this->addCommand($attributes);
+    }
 
-	public function script($javaScript) {
-		$attributes = array(
-			'cmd' => 'runScript'
-		);
-		return $this->addCommand($attributes, $javaScript);
-	}
+    public function remove($element)
+    {
+        $attributes = array(
+            'cmd' => 'remove',
+            'id'  => $element
+        );
 
-	public function show($element) {
-		$attributes = array(
-			'cmd' => 'show',
-			'id' => $element
-		);
-		return $this->addCommand($attributes);
-	}
+        return $this->addCommand($attributes);
+    }
 
-	public function hide($element) {
-		$attributes = array(
-			'cmd' => 'hide',
-			'id' => $element
-		);
-		return $this->addCommand($attributes);
-	}
+    public function addClass($element, $className)
+    {
+        $attributes = array(
+            'cmd' => 'addClass',
+            'id'  => $element
+        );
 
-	public function __toString() {
-		return $this->getJson();
-	}
+        return $this->addCommand($attributes, $className);
+    }
 
-	public function insertBefore($element, $value) {
-		$attributes = array(
-			'cmd' => 'insertBefore',
-			'id' => $element
-		);
-		return $this->addCommand($attributes, $value);
-	}
+    public function removeClass($element, $className = null)
+    {
+        $attributes = array(
+            'cmd' => 'removeClass',
+            'id'  => $element
+        );
 
-	private function addCommand(array $aAttributes, $mData = null) {
-		$aAttributes['data'] = $mData;
-		$this->aCommands[] = $aAttributes;
-		return $this;
-	}
+        return $this->addCommand($attributes, $className);
+    }
+
+    public function returnJson(array $data)
+    {
+        if (!empty($data['errors'])) {
+            $this->aCommands = $data['errors'];
+        } else {
+            $this->aCommands = $data;
+        }
+
+        return $this;
+    }
+
+    public function script($javaScript)
+    {
+        $attributes = array(
+            'cmd' => 'runScript'
+        );
+
+        return $this->addCommand($attributes, $javaScript);
+    }
+
+    public function show($element)
+    {
+        $attributes = array(
+            'cmd' => 'show',
+            'id'  => $element
+        );
+
+        return $this->addCommand($attributes);
+    }
+
+    public function hide($element)
+    {
+        $attributes = array(
+            'cmd' => 'hide',
+            'id'  => $element
+        );
+
+        return $this->addCommand($attributes);
+    }
+
+    public function __toString()
+    {
+        return $this->getJson();
+    }
+
+    public function insertBefore($element, $value)
+    {
+        $attributes = array(
+            'cmd' => 'insertBefore',
+            'id'  => $element
+        );
+
+        return $this->addCommand($attributes, $value);
+    }
+
+    private function addCommand(array $aAttributes, $mData = null)
+    {
+        $aAttributes['data'] = $mData;
+        $this->aCommands[] = $aAttributes;
+
+        return $this;
+    }
 
 }
