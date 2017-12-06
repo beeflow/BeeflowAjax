@@ -28,8 +28,6 @@ BeeflowMessageComponent.info = function (msg, title) {
     alert(title + "\n\n" + msg );
 };
 
-
-BeeflowMessageComponent.
 BeeflowAjax.send = function (action, params, clicked_button, callback, callMethod) {
     $(clicked_button).addClass('disabled');
     var icon = $(clicked_button).children()[0];
