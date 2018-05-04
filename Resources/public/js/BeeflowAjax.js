@@ -286,6 +286,9 @@ BeeflowAjax.initAjaxSelect = function (elementId) {
                 $element.append(option);
             }
             $request.then(function (data) {
+                if ("string" === typeof data) {
+                    var data = JSON.parse(data);
+                }
                 for (var d = 0; d < data.length; d++) {
                     var item = data[d];
                     if (typeof selected_value !== 'object') {
