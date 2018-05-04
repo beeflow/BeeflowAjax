@@ -5,7 +5,7 @@
     "description": "Symfony BeeflowAjaxBundle",
     "keywords": ["api", "ajax"],
     "homepage": "https://github.com/beeflow/BeeflowAjax",
-    "license": "GPL",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Rafal Przetakowski",
