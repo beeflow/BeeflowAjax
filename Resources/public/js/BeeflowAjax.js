@@ -258,9 +258,14 @@ BeeflowAjax.initAjaxLinks = function () {
                 action = $(this).data('action');
             }
 
+            var actionMethod = $(this).data('method');
+            if (typeof actionMethod === 'undefined') {
+                actionMethod = 'GET';
+            }
+
             var callMethod = $(this).data('callback');
 
-            BeeflowAjax.send(action, $(this).data(), this, callMethod, 'GET');
+            BeeflowAjax.send(action, $(this).data(), this, callMethod, actionMethod);
             e.preventDefault();
         });
     });
