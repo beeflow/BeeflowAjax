@@ -82,6 +82,10 @@ BeeflowAjax.ping = function () {
     }
 };
 
+BeeflowAjax.remove = function(elementId) {
+    $(elementId).remove();
+};
+
 BeeflowAjax.ajaxResponseCommands = function (msg) {
     for (index = 0, len = msg.length; index < len; ++index) {
         var command = msg[index]['cmd'];
@@ -105,7 +109,7 @@ BeeflowAjax.ajaxResponseCommands = function (msg) {
                 console.log(msg[index]['data']);
                 break;
             case "remove" :
-                $(msg[index]['id']).remove();
+                BeeflowAjax.remove(msg[index]['id']);
                 break;
             case "append" :
                 $(msg[index]['id']).append(msg[index]['data']);
