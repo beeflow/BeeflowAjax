@@ -13,19 +13,19 @@ var pingFunctions = [];
 var BeeflowMessageComponent = BeeflowMessageComponent || {};
 
 BeeflowMessageComponent.success = function (msg, title) {
-    alert(title + "\n\n" + msg );
+    alert(title + "\n\n" + msg);
 };
 
 BeeflowMessageComponent.error = function (msg, title) {
-    alert(title + "\n\n" + msg );
+    alert(title + "\n\n" + msg);
 };
 
 BeeflowMessageComponent.warning = function (msg, title) {
-    alert(title + "\n\n" + msg );
+    alert(title + "\n\n" + msg);
 };
 
 BeeflowMessageComponent.info = function (msg, title) {
-    alert(title + "\n\n" + msg );
+    alert(title + "\n\n" + msg);
 };
 
 BeeflowAjax.send = function (action, params, clicked_button, callback, callMethod) {
@@ -55,10 +55,10 @@ BeeflowAjax.send = function (action, params, clicked_button, callback, callMetho
         if (callback && typeof(callback) === "function") {
             callback(msg);
         }
-    }).fail(function(msg) {
-        alert( "Something is wrong :( Please contact with administrator." );
+    }).fail(function (msg) {
+        alert("Something is wrong :( Please contact with administrator.");
         console.log(msg)
-    }).always(function() {
+    }).always(function () {
         if (typeof icon !== 'undefined') {
             $(icon).removeClass();
             $(icon).addClass(icon_class);
@@ -82,7 +82,7 @@ BeeflowAjax.ping = function () {
     }
 };
 
-BeeflowAjax.remove = function(elementId) {
+BeeflowAjax.remove = function (elementId) {
     $(elementId).remove();
 };
 
@@ -147,6 +147,16 @@ BeeflowAjax.ajaxResponseCommands = function (msg) {
                 break;
             case "insertBefore":
                 $(msg[index]['data']).insertBefore(msg[index]['id']);
+                break;
+            case "initAjaxLinks":
+                BeeflowAjax.initAjaxLinks();
+                break;
+            case "initAjaxForms":
+                BeeflowAjax.initAjaxForms();
+                break;
+            case "initAjaxSelect":
+                BeeflowAjax.initAjaxSelect();
+                break;
             case "returnJson" :
                 break;
         }

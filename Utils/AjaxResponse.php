@@ -181,6 +181,33 @@ class AjaxResponse
         return $this->addCommand($attributes, $value);
     }
 
+    public function initAjaxLinks()
+    {
+        $attributes = array(
+            'cmd' => 'initAjaxLinks'
+        );
+
+        return $this->addCommand($attributes);
+    }
+
+    public function initAjaxSelect()
+    {
+        $attributes = array(
+            'cmd' => 'initAjaxSelect'
+        );
+
+        return $this->addCommand($attributes);
+    }
+
+    public function initAjaxForms()
+    {
+        $attributes = array(
+            'cmd' => 'initAjaxForms'
+        );
+
+        return $this->addCommand($attributes);
+    }
+
     private function addCommand(array $aAttributes, $mData = null)
     {
         $aAttributes['data'] = $mData;
