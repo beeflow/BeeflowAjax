@@ -126,6 +126,11 @@ class AjaxResponse
         return $this->addCommand($attributes, $className);
     }
 
+    public function setClass($element, $className)
+    {
+        return $this->removeClass($element)->addClass($element, $className);
+    }
+
     public function returnJson(array $data)
     {
         if (!empty($data['errors'])) {
