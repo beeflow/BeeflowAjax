@@ -31,17 +31,13 @@ class AjaxResponseTest extends TestCase
 
     private $ajaxResponse;
 
-    public function setUp()
-    {
-        $this->ajaxResponse = new AjaxResponse();
-    }
-
     /**
      * @test
      */
     public function getJson()
     {
-        $this->assertEquals('[]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $this->assertEquals('[]', $ajaxResponse->getJson());
     }
 
     /**
@@ -49,7 +45,8 @@ class AjaxResponseTest extends TestCase
      */
     public function getArray()
     {
-        $this->assertTrue(is_array($this->ajaxResponse->getArray()));
+        $ajaxResponse = new AjaxResponse();
+        $this->assertTrue(is_array($ajaxResponse->getArray()));
     }
 
     /**
@@ -57,8 +54,9 @@ class AjaxResponseTest extends TestCase
      */
     public function alert()
     {
-        $this->ajaxResponse->alert('Test message');
-        $this->assertEquals('[{"cmd":"alert","data":"Test message"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->alert('Test message');
+        $this->assertEquals('[{"cmd":"alert","data":"Test message"}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -66,8 +64,9 @@ class AjaxResponseTest extends TestCase
      */
     public function alertSuccess()
     {
-        $this->ajaxResponse->alertSuccess('Test message');
-        $this->assertEquals('[{"cmd":"alertSuccess","data":"Test message"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->alertSuccess('Test message');
+        $this->assertEquals('[{"cmd":"alertSuccess","title":"","data":"Test message"}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -75,8 +74,9 @@ class AjaxResponseTest extends TestCase
      */
     public function alertError()
     {
-        $this->ajaxResponse->alertError('Test message');
-        $this->assertEquals('[{"cmd":"alertError","data":"Test message"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->alertError('Test message');
+        $this->assertEquals('[{"cmd":"alertError","title":"","data":"Test message"}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -84,8 +84,9 @@ class AjaxResponseTest extends TestCase
      */
     public function alertWarning()
     {
-        $this->ajaxResponse->alertWarning('Test message');
-        $this->assertEquals('[{"cmd":"alertWarning","data":"Test message"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->alertWarning('Test message');
+        $this->assertEquals('[{"cmd":"alertWarning","title":"","data":"Test message"}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -93,8 +94,9 @@ class AjaxResponseTest extends TestCase
      */
     public function alertInfo()
     {
-        $this->ajaxResponse->alertInfo('Test message');
-        $this->assertEquals('[{"cmd":"alertInfo","data":"Test message"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->alertInfo('Test message');
+        $this->assertEquals('[{"cmd":"alertInfo","title":"","data":"Test message"}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -102,8 +104,9 @@ class AjaxResponseTest extends TestCase
      */
     public function debug()
     {
-        $this->ajaxResponse->debug('Test message');
-        $this->assertEquals('[{"cmd":"debug","data":"Test message"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->debug('Test message');
+        $this->assertEquals('[{"cmd":"debug","data":"Test message"}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -111,8 +114,9 @@ class AjaxResponseTest extends TestCase
      */
     public function append()
     {
-        $this->ajaxResponse->append('element-id', 'Test');
-        $this->assertEquals('[{"cmd":"append","id":"element-id","data":"Test"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->append('element-id', 'Test');
+        $this->assertEquals('[{"cmd":"append","id":"element-id","data":"Test"}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -120,8 +124,9 @@ class AjaxResponseTest extends TestCase
      */
     public function assign()
     {
-        $this->ajaxResponse->assign('element-id', 'Test');
-        $this->assertEquals('[{"cmd":"assign","id":"element-id","data":"Test"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->assign('element-id', 'Test');
+        $this->assertEquals('[{"cmd":"assign","id":"element-id","data":"Test"}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -129,8 +134,9 @@ class AjaxResponseTest extends TestCase
      */
     public function redirect()
     {
-        $this->ajaxResponse->redirect('example.com');
-        $this->assertEquals('[{"cmd":"redirect","url":"example.com","data":null}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->redirect('example.com');
+        $this->assertEquals('[{"cmd":"redirect","url":"example.com","data":null}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -138,8 +144,9 @@ class AjaxResponseTest extends TestCase
      */
     public function reloadLocation()
     {
-        $this->ajaxResponse->reloadLocation();
-        $this->assertEquals('[{"cmd":"reloadLocation","data":null}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->reloadLocation();
+        $this->assertEquals('[{"cmd":"reloadLocation","data":null}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -147,8 +154,9 @@ class AjaxResponseTest extends TestCase
      */
     public function remove()
     {
-        $this->ajaxResponse->remove('element-id');
-        $this->assertEquals('[{"cmd":"remove","id":"element-id","data":null}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->remove('element-id');
+        $this->assertEquals('[{"cmd":"remove","id":"element-id","data":null}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -156,8 +164,9 @@ class AjaxResponseTest extends TestCase
      */
     public function addClass()
     {
-        $this->ajaxResponse->addClass('element-id', 'new-classname');
-        $this->assertEquals('[{"cmd":"addClass","id":"element-id","data":"new-classname"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->addClass('element-id', 'new-classname');
+        $this->assertEquals('[{"cmd":"addClass","id":"element-id","data":"new-classname"}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -165,8 +174,9 @@ class AjaxResponseTest extends TestCase
      */
     public function removeClass()
     {
-        $this->ajaxResponse->removeClass('element-id', 'new-classname');
-        $this->assertEquals('[{"cmd":"removeClass","id":"element-id","data":"new-classname"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->removeClass('element-id', 'new-classname');
+        $this->assertEquals('[{"cmd":"removeClass","id":"element-id","data":"new-classname"}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -174,8 +184,9 @@ class AjaxResponseTest extends TestCase
      */
     public function removeAllClasses()
     {
-        $this->ajaxResponse->removeClass('element-id');
-        $this->assertEquals('[{"cmd":"removeClass","id":"element-id","data":null}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->removeClass('element-id');
+        $this->assertEquals('[{"cmd":"removeClass","id":"element-id","data":null}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -183,8 +194,9 @@ class AjaxResponseTest extends TestCase
      */
     public function show()
     {
-        $this->ajaxResponse->show('element-id');
-        $this->assertEquals('[{"cmd":"show","id":"element-id","data":null}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->show('element-id');
+        $this->assertEquals('[{"cmd":"show","id":"element-id","data":null}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -192,8 +204,9 @@ class AjaxResponseTest extends TestCase
      */
     public function hide()
     {
-        $this->ajaxResponse->hide('element-id');
-        $this->assertEquals('[{"cmd":"hide","id":"element-id","data":null}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->hide('element-id');
+        $this->assertEquals('[{"cmd":"hide","id":"element-id","data":null}]', $ajaxResponse->getJson());
     }
 
     /**
@@ -201,9 +214,10 @@ class AjaxResponseTest extends TestCase
      */
     public function printOutput()
     {
-        $this->ajaxResponse->hide('element-id');
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->hide('element-id');
         ob_start();
-        $this->ajaxResponse->printOutput();
+        $ajaxResponse->printOutput();
         $given = ob_get_contents();
         ob_end_clean();
         $this->assertEquals('[{"cmd":"hide","id":"element-id","data":null}]', $given);
@@ -214,8 +228,9 @@ class AjaxResponseTest extends TestCase
      */
     public function returnJson()
     {
-        $this->ajaxResponse->returnJson(array('test-field' => 'test value'));
-        $this->assertEquals('{"test-field":"test value"}', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->returnJson(array('test-field' => 'test value'));
+        $this->assertEquals('{"test-field":"test value"}', $ajaxResponse->getJson());
     }
 
     /**
@@ -223,8 +238,9 @@ class AjaxResponseTest extends TestCase
      */
     public function returnJsonWithErrors()
     {
-        $this->ajaxResponse->returnJson(array('errors' => array('Some error message', 'Other error message')));
-        $this->assertEquals('["Some error message","Other error message"]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->returnJson(array('errors' => array('Some error message', 'Other error message')));
+        $this->assertEquals('["Some error message","Other error message"]', $ajaxResponse->getJson());
     }
 
     /**
@@ -232,16 +248,16 @@ class AjaxResponseTest extends TestCase
      */
     public function script()
     {
-        $this->ajaxResponse->script('alert()');
-        $this->assertEquals('[{"cmd":"runScript","data":"alert()"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->script('alert()');
+        $this->assertEquals('[{"cmd":"runScript","data":"alert()"}]', $ajaxResponse->getJson());
     }
 
-    /**
-     * @test
-     */
-    public function toString()
+
+    public function testIfToStringMethodWorksCorrectly()
     {
-        $this->assertEquals('[]', $this->ajaxResponse);
+        $ajaxResponse = new AjaxResponse();
+        $this->assertEquals('[]', $ajaxResponse);
     }
 
     /**
@@ -249,8 +265,40 @@ class AjaxResponseTest extends TestCase
      */
     public function insertBefore()
     {
-        $this->ajaxResponse->addClass('element-id', 'test');
-        $this->assertEquals('[{"cmd":"insertBefore","id":"element-id","data":"test"}]', $this->ajaxResponse->getJson());
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->insertBefore('element-id', 'test');
+        $this->assertEquals('[{"cmd":"insertBefore","id":"element-id","data":"test"}]', $ajaxResponse->getJson());
     }
 
+    public function testInitAjaxLinks()
+    {
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->initAjaxLinks();
+
+        $this->assertEquals('[{"cmd":"initAjaxLinks","data":null}]', $ajaxResponse->getJson());
+    }
+
+    public function testInitAjaxSelect()
+    {
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->initAjaxSelect();
+
+        $this->assertEquals('[{"cmd":"initAjaxSelect","data":null}]', $ajaxResponse->getJson());
+    }
+
+    public function testInitAjaxForms()
+    {
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->initAjaxForms();
+
+        $this->assertEquals('[{"cmd":"initAjaxForms","data":null}]', $ajaxResponse->getJson());
+    }
+
+    public function testSetClass()
+    {
+        $ajaxResponse = new AjaxResponse();
+        $ajaxResponse->setClass('#element-id', 'test-class');
+
+        $this->assertEquals('[{"cmd":"removeClass","id":"#element-id","data":null},{"cmd":"addClass","id":"#element-id","data":"test-class"}]', $ajaxResponse->getJson());
+    }
 }

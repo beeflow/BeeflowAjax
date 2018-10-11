@@ -98,16 +98,16 @@ BeeflowAjax.ajaxResponseCommands = function (msg) {
                 alert(msg[index]['data']);
                 break;
             case "alertSuccess" :
-                BeeflowMessageComponent.success('', msg[index]['data']);
+                BeeflowMessageComponent.success(msg[index]['data'], msg[index]['title']);
                 break;
             case "alertError" :
-                BeeflowMessageComponent.error(msg[index]['data'], '');
+                BeeflowMessageComponent.error(msg[index]['data'], msg[index]['title']);
                 break;
             case "alertWarning" :
-                BeeflowMessageComponent.warning('', msg[index]['data']);
+                BeeflowMessageComponent.warning(msg[index]['data'], msg[index]['title']);
                 break;
             case "alertInfo" :
-                BeeflowMessageComponent.info('', msg[index]['data']);
+                BeeflowMessageComponent.info(msg[index]['data'], msg[index]['title']);
                 break;
             case "debug" :
                 console.log(msg[index]['data']);

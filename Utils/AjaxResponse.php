@@ -32,24 +32,36 @@ class AjaxResponse
         return $this->addCommand(array('cmd' => 'alert'), $msg);
     }
 
-    public function alertSuccess($msg)
+    public function alertSuccess($msg, $title = '')
     {
-        return $this->addCommand(array('cmd' => 'alertSuccess'), $msg);
+        return $this->addCommand(array(
+            'cmd'   => 'alertSuccess',
+            'title' => $title
+        ), $msg);
     }
 
-    public function alertError($msg)
+    public function alertError($msg, $title = '')
     {
-        return $this->addCommand(array('cmd' => 'alertError'), $msg);
+        return $this->addCommand(array(
+            'cmd'   => 'alertError',
+            'title' => $title
+        ), $msg);
     }
 
-    public function alertWarning($msg)
+    public function alertWarning($msg, $title = '')
     {
-        return $this->addCommand(array('cmd' => 'alertWarning'), $msg);
+        return $this->addCommand(array(
+            'cmd'   => 'alertWarning',
+            'title' => $title
+        ), $msg);
     }
 
-    public function alertInfo($msg)
+    public function alertInfo($msg, $title = '')
     {
-        return $this->addCommand(array('cmd' => 'alertInfo'), $msg);
+        return $this->addCommand(array(
+            'cmd'   => 'alertInfo',
+            'title' => $title
+        ), $msg);
     }
 
     public function debug($data)
