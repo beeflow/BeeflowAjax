@@ -1,7 +1,6 @@
 {
     "name": "beeflow/ajaxbundle",
     "type": "symfony-bundle",
-    "vesion": "1.1.3",
     "description": "Symfony BeeflowAjaxBundle",
     "keywords": ["api", "ajax"],
     "homepage": "https://github.com/beeflow/BeeflowAjax",

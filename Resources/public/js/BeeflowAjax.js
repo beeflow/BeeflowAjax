@@ -28,6 +28,10 @@ BeeflowMessageComponent.info = function (msg, title) {
     alert(title + "\n\n" + msg);
 };
 
+BeeflowMessageComponent.confirm = function (element, event) {
+    return confirm($(element).data('confirm'));
+};
+
 BeeflowAjax.send = function (action, params, clicked_button, callback, callMethod) {
     $(clicked_button).addClass('disabled');
     var icon = $(clicked_button).children()[0];
@@ -257,30 +261,35 @@ BeeflowAjax.initAjaxForms = function () {
     });
 };
 
+BeeflowAjax.linkClickedAction = function(element, e) {
+    var action = $(element).attr('href');
+    if (action === '#' || typeof action === 'undefined') {
+        action = $(element).data('action');
+    }
+
+    var actionMethod = $(element).data('method');
+    if (typeof actionMethod === 'undefined') {
+        actionMethod = 'GET';
+    }
+
+    var callMethod = $(element).data('callback');
+
+    BeeflowAjax.send(action, $(element).data(), element, callMethod, actionMethod);
+    e.preventDefault();
+};
+
 BeeflowAjax.initAjaxLinks = function () {
     $('.ajax-link').each(function () {
         $(this).unbind('click');
         $(this).click(function (e) {
             if (typeof $(this).data('confirm') !== 'undefined') {
-                if (!confirm($(this).data('confirm'))) {
+                if (!BeeflowMessageComponent.confirm($(this), e)) {
                     e.preventDefault();
                     return false;
                 }
             }
-            var action = $(this).attr('href');
-            if (action === '#' || typeof action === 'undefined') {
-                action = $(this).data('action');
-            }
 
-            var actionMethod = $(this).data('method');
-            if (typeof actionMethod === 'undefined') {
-                actionMethod = 'GET';
-            }
-
-            var callMethod = $(this).data('callback');
-
-            BeeflowAjax.send(action, $(this).data(), this, callMethod, actionMethod);
-            e.preventDefault();
+            BeeflowAjax.linkClickedAction($(this), e);
         });
     });
 };
