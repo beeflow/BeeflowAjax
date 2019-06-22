@@ -1,31 +1,38 @@
 {
-    "name": "beeflow/ajaxbundle",
-    "type": "symfony-bundle",
-    "description": "Symfony BeeflowAjaxBundle",
-    "keywords": ["api", "ajax"],
-    "homepage": "https://github.com/beeflow/BeeflowAjax",
-    "license": "GPL-3.0-or-later",
-    "authors": [
-        {
-            "name": "Rafal Przetakowski",
-            "email": "rafal.p@beeflow.co.uk"
-        }
-    ],
-    "support": {
-		"issues": "https://github.com/beeflow/BeeflowAjax/issues",
-		"source": "https://github.com/beeflow/BeeflowAjax/"
-	},
-    "require": {
-        "php": ">=7.1",
-        "ext-json": "*",
-        "ext-xdebug": "*",
-        "symfony/framework-bundle": ">=3.4",
-        "phpunit/phpunit": ">=7.4"
-    },
-    "autoload": {
-        "psr-4": { "Beeflow\\AjaxBundle\\": "" }
-    },
-    "scripts" : {
-        "test" : "./vendor/phpunit/phpunit/phpunit -d memory_limit=-1 -c phpunit.xml.dist"
+  "name": "beeflow/ajaxbundle",
+  "type": "symfony-bundle",
+  "description": "Symfony BeeflowAjaxBundle",
+  "keywords": [
+    "api",
+    "ajax"
+  ],
+  "homepage": "https://github.com/beeflow/BeeflowAjax",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Rafal Przetakowski",
+      "email": "rafal.p@beeflow.co.uk"
     }
+  ],
+  "support": {
+    "issues": "https://github.com/beeflow/BeeflowAjax/issues",
+    "source": "https://github.com/beeflow/BeeflowAjax/"
+  },
+  "require": {
+    "php": ">=7.1",
+    "ext-json": "*",
+    "symfony/framework-bundle": ">=3.4"
+  },
+  "require-dev": {
+    "ext-xdebug": "*",
+    "phpunit/phpunit": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Beeflow\\AjaxBundle\\": ""
+    }
+  },
+  "scripts": {
+    "test": "./vendor/phpunit/phpunit/phpunit -d memory_limit=-1 -c phpunit.xml.dist"
+  }
 }
