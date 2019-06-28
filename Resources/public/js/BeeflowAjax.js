@@ -20,6 +20,10 @@ BeeflowMessageComponent.error = function (msg, title) {
     alert(title + "\n\n" + msg);
 };
 
+BeeflowMessageComponent.internalServerError = function () {
+    alert("Internal Server Error\n\nThe server encountered something unexpected that didn't allow it to complete the request. We apologize.");
+};
+
 BeeflowMessageComponent.warning = function (msg, title) {
     alert(title + "\n\n" + msg);
 };
@@ -60,7 +64,7 @@ BeeflowAjax.send = function (action, params, clicked_button, callback, callMetho
             callback(msg);
         }
     }).fail(function (msg) {
-        alert("Something is wrong :( Please contact with administrator.");
+        BeeflowMessageComponent.internalServerError();
         console.log(msg)
     }).always(function () {
         if (typeof icon !== 'undefined') {
