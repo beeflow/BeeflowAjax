@@ -12,6 +12,12 @@ var pingFunctions = [];
  */
 var BeeflowMessageComponent = BeeflowMessageComponent || {};
 
+BeeflowMessages = {
+    'Internal Server Error': 'Internal Server Error',
+    "The server encountered something unexpected that didn't allow it to complete the request. We apologize.": "The server encountered something unexpected that didn't allow it to complete the request. We apologize.",
+    'This file is too large': 'This file is too large!'
+};
+
 BeeflowMessageComponent.success = function (msg, title) {
     alert(title + "\n\n" + msg);
 };
@@ -21,7 +27,12 @@ BeeflowMessageComponent.error = function (msg, title) {
 };
 
 BeeflowMessageComponent.internalServerError = function () {
-    alert("Internal Server Error\n\nThe server encountered something unexpected that didn't allow it to complete the request. We apologize.");
+    let $alertElements = [
+        BeeflowMessages['Internal Server Error'],
+        BeeflowMessages["The server encountered something unexpected that didn't allow it to complete the request. We apologize."]
+    ];
+
+    alert($alertElements.join("\n\n"));
 };
 
 BeeflowMessageComponent.warning = function (msg, title) {
@@ -64,8 +75,13 @@ BeeflowAjax.send = function (action, params, clicked_button, callback, callMetho
             callback(msg);
         }
     }).fail(function (msg) {
+        if (code === 'Unauthorized') {
+            window.location.href = '/';
+            return;
+        }
+
         BeeflowMessageComponent.internalServerError();
-        console.log(msg)
+        console.log(msg);
     }).always(function () {
         if (typeof icon !== 'undefined') {
             $(icon).removeClass();
