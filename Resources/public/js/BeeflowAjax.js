@@ -110,6 +110,16 @@ BeeflowAjax.remove = function (elementId) {
     $(elementId).remove();
 };
 
+BeeflowAjax.loadScript = function ($scriptName, $callback) {
+    $.ajax({
+        url: $scriptName,
+        dataType: 'script',
+        async: true
+    }).done(function () {
+        eval($callback)();
+    });
+};
+
 BeeflowAjax.ajaxResponseCommands = function (msg) {
     for (index = 0, len = msg.length; index < len; ++index) {
         var command = msg[index]['cmd'];
@@ -180,6 +190,9 @@ BeeflowAjax.ajaxResponseCommands = function (msg) {
                 break;
             case "initAjaxSelect":
                 BeeflowAjax.initAjaxSelect();
+                break;
+            case "loadScript" :
+                BeeflowAjax.loadScript(msg[index]['script'], msg[index]['callback']);
                 break;
             case "returnJson" :
                 break;

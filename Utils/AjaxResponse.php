@@ -10,140 +10,228 @@ namespace Beeflow\AjaxBundle\Utils;
 class AjaxResponse
 {
 
-    private $aCommands = array();
+    private $aCommands = [];
 
+    /**
+     * @return false|string
+     */
     public function getJson()
     {
         return json_encode($this->aCommands);
     }
 
-    public function printOutput()
+    public function printOutput(): void
     {
         echo $this->getJson();
     }
 
-    public function getArray()
+    /**
+     * @return array
+     */
+    public function getArray(): array
     {
         return $this->aCommands;
     }
 
-    public function alert($msg)
+    /**
+     * @param $msg
+     *
+     * @return AjaxResponse
+     */
+    public function alert($msg): self
     {
-        return $this->addCommand(array('cmd' => 'alert'), $msg);
+        return $this->addCommand(['cmd' => 'alert'], $msg);
     }
 
-    public function alertSuccess($msg, $title = '')
+    /**
+     * @param string $msg
+     * @param string $title
+     *
+     * @return AjaxResponse
+     */
+    public function alertSuccess(string $msg, string $title = ''): self
     {
-        return $this->addCommand(array(
+        return $this->addCommand([
             'cmd'   => 'alertSuccess',
             'title' => $title
-        ), $msg);
+        ], $msg);
     }
 
-    public function alertError($msg, $title = '')
+    /**
+     * @param string $msg
+     * @param string $title
+     *
+     * @return AjaxResponse
+     */
+    public function alertError(string $msg, string $title = ''): self
     {
-        return $this->addCommand(array(
+        return $this->addCommand([
             'cmd'   => 'alertError',
             'title' => $title
-        ), $msg);
+        ], $msg);
     }
 
-    public function alertWarning($msg, $title = '')
+    /**
+     * @param string $msg
+     * @param string $title
+     *
+     * @return AjaxResponse
+     */
+    public function alertWarning(string $msg, string $title = ''): self
     {
-        return $this->addCommand(array(
+        return $this->addCommand([
             'cmd'   => 'alertWarning',
             'title' => $title
-        ), $msg);
+        ], $msg);
     }
 
-    public function alertInfo($msg, $title = '')
+    /**
+     * @param string $msg
+     * @param string $title
+     *
+     * @return AjaxResponse
+     */
+    public function alertInfo(string $msg, string $title = ''): self
     {
-        return $this->addCommand(array(
+        return $this->addCommand([
             'cmd'   => 'alertInfo',
             'title' => $title
-        ), $msg);
+        ], $msg);
     }
 
-    public function debug($data)
+    /**
+     * @param $data
+     *
+     * @return AjaxResponse
+     */
+    public function debug($data): self
     {
-        return $this->addCommand(array('cmd' => 'debug'), $data);
+        return $this->addCommand(['cmd' => 'debug'], $data);
     }
 
-    public function append($element, $value)
+    /**
+     * @param string $element
+     * @param string $value
+     *
+     * @return AjaxResponse
+     */
+    public function append(string $element, string $value): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'append',
             'id'  => $element
-        );
+        ];
 
         return $this->addCommand($attributes, $value);
     }
 
-    public function assign($element, $value)
+    /**
+     * @param string $element
+     * @param string $value
+     *
+     * @return AjaxResponse
+     */
+    public function assign(string $element, string $value): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'assign',
             'id'  => $element
-        );
+        ];
 
         return $this->addCommand($attributes, $value);
     }
 
-    public function redirect($url)
+    /**
+     * @param string $url
+     *
+     * @return AjaxResponse
+     */
+    public function redirect(string $url): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'redirect',
             'url' => $url
-        );
+        ];
 
         return $this->addCommand($attributes);
     }
 
-    public function reloadLocation()
+    /**
+     * @return AjaxResponse
+     */
+    public function reloadLocation(): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'reloadLocation'
-        );
+        ];
 
         return $this->addCommand($attributes);
     }
 
-    public function remove($element)
+    /**
+     * @param string $element
+     *
+     * @return AjaxResponse
+     */
+    public function remove(string $element): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'remove',
             'id'  => $element
-        );
+        ];
 
         return $this->addCommand($attributes);
     }
 
-    public function addClass($element, $className)
+    /**
+     * @param string $element
+     * @param string $className
+     *
+     * @return AjaxResponse
+     */
+    public function addClass(string $element, string $className): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'addClass',
             'id'  => $element
-        );
+        ];
 
         return $this->addCommand($attributes, $className);
     }
 
-    public function removeClass($element, $className = null)
+    /**
+     * @param string      $element
+     * @param string|null $className
+     *
+     * @return AjaxResponse
+     */
+    public function removeClass(string $element, ?string $className = null): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'removeClass',
             'id'  => $element
-        );
+        ];
 
         return $this->addCommand($attributes, $className);
     }
 
-    public function setClass($element, $className)
+    /**
+     * @param string $element
+     * @param string $className
+     *
+     * @return AjaxResponse
+     */
+    public function setClass(string $element, string $className): self
     {
         return $this->removeClass($element)->addClass($element, $className);
     }
 
-    public function returnJson(array $data)
+    /**
+     * @param array $data
+     *
+     * @return AjaxResponse
+     */
+    public function returnJson(array $data): self
     {
         if (!empty($data['errors'])) {
             $this->aCommands = $data['errors'];
@@ -154,78 +242,134 @@ class AjaxResponse
         return $this;
     }
 
-    public function script($javaScript)
+    /**
+     * @param string $javaScript
+     *
+     * @return AjaxResponse
+     */
+    public function script(string $javaScript): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'runScript'
-        );
+        ];
 
         return $this->addCommand($attributes, $javaScript);
     }
 
-    public function show($element)
+    /**
+     * @param string $element
+     *
+     * @return AjaxResponse
+     */
+    public function show(string $element): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'show',
             'id'  => $element
-        );
+        ];
 
         return $this->addCommand($attributes);
     }
 
-    public function hide($element)
+    /**
+     * @param string $element
+     *
+     * @return AjaxResponse
+     */
+    public function hide(string $element): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'hide',
             'id'  => $element
-        );
+        ];
 
         return $this->addCommand($attributes);
     }
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
         return $this->getJson();
     }
 
-    public function insertBefore($element, $value)
+    /**
+     * @param string $element
+     * @param string $value
+     *
+     * @return AjaxResponse
+     */
+    public function insertBefore(string $element, string $value): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'insertBefore',
             'id'  => $element
-        );
+        ];
 
         return $this->addCommand($attributes, $value);
     }
 
-    public function initAjaxLinks()
+    /**
+     * @return AjaxResponse
+     */
+    public function initAjaxLinks(): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'initAjaxLinks'
-        );
+        ];
 
         return $this->addCommand($attributes);
     }
 
-    public function initAjaxSelect()
+    /**
+     * @return AjaxResponse
+     */
+    public function initAjaxSelect(): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'initAjaxSelect'
-        );
+        ];
 
         return $this->addCommand($attributes);
     }
 
-    public function initAjaxForms()
+    /**
+     * @return AjaxResponse
+     */
+    public function initAjaxForms(): self
     {
-        $attributes = array(
+        $attributes = [
             'cmd' => 'initAjaxForms'
-        );
+        ];
 
         return $this->addCommand($attributes);
     }
 
-    private function addCommand(array $aAttributes, $mData = null)
+    /**
+     * @param string $name
+     * @param string $callback
+     *
+     * @return AjaxResponse
+     */
+    public function loadScript(string $name, string $callback): self
+    {
+        $attributes = [
+            'cmd'      => 'loadScript',
+            'script'   => $name,
+            'callback' => $callback
+        ];
+
+        return $this->addCommand($attributes);
+    }
+
+    /**
+     * @param array $aAttributes
+     * @param null  $mData
+     *
+     * @return AjaxResponse
+     */
+    private function addCommand(array $aAttributes, $mData = null): self
     {
         $aAttributes['data'] = $mData;
         $this->aCommands[] = $aAttributes;
