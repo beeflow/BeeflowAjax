@@ -27,7 +27,7 @@ BeeflowMessageComponent.error = function (msg, title) {
 };
 
 BeeflowMessageComponent.internalServerError = function () {
-    let $alertElements = [
+    var $alertElements = [
         BeeflowMessages['Internal Server Error'],
         BeeflowMessages["The server encountered something unexpected that didn't allow it to complete the request. We apologize."]
     ];
@@ -229,38 +229,44 @@ BeeflowAjax.getFormValues = function (form) {
     } else {
         var objects = $(form).serializeArray();
     }
-    var returnJson = {};
+    var data = {};
+
     jQuery.each(objects, function (i, field) {
-        returnJson = BeeflowAjax.prepareJson(returnJson, field.name, field.value);
+        data[field.name] = field.value;
     });
 
-    return JSON.stringify(returnJson);
+    return JSON.stringify(BeeflowAjax.prepareJson(data));
 };
 
-BeeflowAjax.prepareJson = function (returnJson, fieldName, fieldValue) {
-    if (/\[(.*)\]/.exec(fieldName) != null) {
-        var new_field = /(.*)\[/.exec(fieldName)[1];
-        var new_field_key = /\[(.*)\]/.exec(fieldName)[1];
-        if (typeof returnJson[new_field] === 'undefined') {
-            returnJson[new_field] = {};
-        }
-        returnJson[new_field] = BeeflowAjax.prepareJson(returnJson[new_field], new_field_key, fieldValue);
-    } else {
-        if (typeof returnJson[fieldName] !== 'undefined' && Object.prototype.toString.call(returnJson[fieldName]) !== '[object Array]') {
-            var tmp = returnJson[fieldName];
-            returnJson[fieldName] = [tmp, htmlEncode(fieldValue)];
-        } else if (typeof returnJson[fieldName] !== 'undefined' && Object.prototype.toString.call(returnJson[fieldName]) === '[object Array]') {
-            returnJson[fieldName].push(htmlEncode(fieldValue));
-        } else {
-            returnJson[fieldName] = htmlEncode(fieldValue);
-        }
-    }
-
+BeeflowAjax.prepareJson = function (data) {
     function htmlEncode(value) {
         return $('<div/>').text(value).html();
     }
 
-    return returnJson;
+    var ret = {};
+    retloop:
+        for (var input in data) {
+            var val = data[input];
+
+            var parts = input.split('[');
+            var last = ret;
+
+            for (var i in parts) {
+                var part = parts[i];
+                if (part.substr(-1) == ']') {
+                    part = part.substr(0, part.length - 1);
+                }
+
+                if (i == parts.length - 1) {
+                    last[part] = htmlEncode(val);
+                    continue retloop;
+                } else if (!last.hasOwnProperty(part)) {
+                    last[part] = {};
+                }
+                last = last[part];
+            }
+        }
+    return ret;
 };
 
 BeeflowAjax.initAjaxForms = function () {
